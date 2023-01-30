@@ -1,10 +1,11 @@
 # LightDB-EM-FAQ
 
 
-## 手工调整了em内嵌的绿色版本的lightdb监听的端口，需要进行如下操作
+## 1、手工调整了em内嵌的绿色版本的lightdb数据库监听端口引发的问题解决
 ```
-em内嵌的绿色版本的lightdb的版本(13.8-22.4)已支持单机分布式，默认启动后监听端口为5434，
+a、em内嵌的绿色版本的lightdb的版本(13.8-22.4)已支持单机分布式，默认启动后监听端口为5434，
 如果手动修改了em内嵌的绿色版本的lightdb监听端口(配置文件${LTDATA}/lightdb.conf中配置项port)为5436，在em启动后(em启动过程中会启动绿色版本lightdb数据库)需要进行如下操作：
+
 1、[lightdb@192_168_76_128 scripts]$ ltsql -h localhost -p5436 -d postgres -c 'update cron.job set nodeport=5436;'
 UPDATE 5
 2、[lightdb@192_168_76_128 scripts]$ ltsql -h localhost -p5436 -d postgres -c "update servers set connstr='dbname=postgres port=5436';"
@@ -12,7 +13,7 @@ UPDATE 1
 3、[lightdb@192_168_76_128 scripts]$ ltsql -h localhost -p5436 -d em -c "update pg_dist_node set nodeport=5436;"
 UPDATE 1
 
-验证是否操作成功：
+b、验证是否操作成功：
 1、[lightdb@192_168_76_128 scripts]$ ltsql -h localhost -p5436 -d em -c "select * from pg_dist_node;"
  nodeid | groupid | nodename  | nodeport | noderack | hasmetadata | isactive | noderole | nodecluster | metadatasynced | shouldhaveshards
 --------+---------+-----------+----------+----------+-------------+----------+----------+-------------+----------------+------------------
