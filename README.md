@@ -11,7 +11,7 @@
 
 ## 2、上传文件时，出现上传失败的错误，该如何定位解决？
 
-![图片](.\static\errupload.png)
+![errupload.png](https://github.com/Jaywzy/LightDB-EM-FAQ/blob/master/static/errupload.png "DBSCAN Performance Comparison")
 ```
 解决方法 ：
 	a :通过浏览器控制台查看上传接口提示:Processing of multipart/form-data request failed. 设备上没有空间
